@@ -481,6 +481,26 @@ projectCards.forEach(card => {
     }
 });
 
+// Smooth scroll to projects section
+const exploreBtn = document.getElementById('exploreBtn');
+if (exploreBtn) {
+    exploreBtn.addEventListener('click', () => {
+        const projectsSection = document.querySelector('.projects-section');
+        if (projectsSection) {
+            const prefersReducedMotionValue = prefersReducedMotion();
+            projectsSection.scrollIntoView({
+                behavior: prefersReducedMotionValue ? 'auto' : 'smooth',
+                block: 'start'
+            });
+            // Focus on the projects section after scrolling
+            setTimeout(() => {
+                const firstTab = document.querySelector('.tab');
+                if (firstTab) firstTab.focus();
+            }, prefersReducedMotionValue ? 0 : 500);
+        }
+    });
+}
+
 // Accessibility helper referenced by modal code
 function setMainInert(isInert) {
     const main = document.getElementById('main-content');
